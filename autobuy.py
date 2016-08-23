@@ -5,7 +5,7 @@ import urllib2
 import sys
 from PIL import Image
 import ssl
-
+#https://github.com/andelf/fuck12306/blob/master/fuck12306.py
 #关闭证书验证
 if hasattr(ssl, '_create_unverified_context'):
     ssl._create_default_https_context = ssl._create_unverified_context
