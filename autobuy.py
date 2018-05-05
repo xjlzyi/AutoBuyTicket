@@ -31,7 +31,6 @@ class UserInfo(object):
         self.all_mobile = []
         self.all_country = []
         
-
 def login():
     #建立cookie处理
     cjar = http.cookiejar.CookieJar()
@@ -41,6 +40,10 @@ def login():
     login_url = "https://kyfw.12306.cn/otn/login/init"
     req_data = get_request_data(login_url)
     print("login: " + req_data)
+    post_yzm_data(parse_yzm_pos())
+    post_username_data()
+    post_other_login()
+    test_user_center()
 
 def parse_yzm_pos():
     yzm_url = "https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&module=login&rand=sjrand"
@@ -135,7 +138,7 @@ def start():
             to_code = stations[to_name]
             show_no_ticket = "Y"#input(" 显示全部可预订车次（Y：是 N：否）")
             query_date = input("请输入要查询的日期，如2017-03-05：")
-            purpose_code = "ADULT"
+            purpose_code = "ADULT"#如果是学生，这个值是0X00
             train_dic = query_ticket(from_code, to_code, show_no_ticket)
             next_step = input("请选择下一步操作（0：退出 1：重新查询 2：购票）：")
             if next_step == '0':
@@ -369,8 +372,4 @@ def get_user_data(token):
 
 if __name__ == "__main__":
     login()
-    post_yzm_data(parse_yzm_pos())
-    post_username_data()
-    post_other_login()
-    test_user_center()
     start()
